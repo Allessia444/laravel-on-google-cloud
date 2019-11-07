@@ -158,6 +158,29 @@
                 <input type="text" class="form-control" id="authorization_level" aria-describedby="emailHelp" placeholder="Enter Authorization Level..." name="authorization_level">
                 <span id="error_level_name" class="error"></span>
               </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="level_person">Authorized person</label>
+                </div>
+                <select class="custom-select" id="level_person">
+                </select>
+              </div>
+              <span id="error_level_person" class="error"></span>
+              <div class="form-group">
+                <label for="level_email">Email</label>
+                <input type="email" class="form-control required" id="level_email" aria-describedby="emailHelp" placeholder="Enter email..." name="level_email">
+                <span id="error_level_email" class="error"></span>
+              </div>
+              <div class="form-group">
+                <label for="level_password">password</label>
+                <input type="password" class="form-control required" id="level_password" aria-describedby="emailHelp" placeholder="Enter password..." name="level_password">
+                <span id="error_level_password" class="error"></span>
+              </div>
+              <div class="form-group">
+                <label for="level_number">Contact number</label>
+                <input type="text" class="form-control required" id="level_number" aria-describedby="emailHelp" placeholder="Enter contact number..." name="level_number">
+                <span id="error_level_number" class="error"></span>
+              </div>
             </form>
           </div>
           <div class="modal-footer">
@@ -256,6 +279,7 @@
                 <tr>
                   <th scope="col">No</th>
                   <th scope="col">name</th>
+                  <th scope="col">Person</th>
                 </tr>
               </thead>
               <tbody id="level_data">

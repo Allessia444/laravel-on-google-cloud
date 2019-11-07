@@ -14,6 +14,13 @@ $(document).on('click','#branch',function(){
 $(document).on('click','#level',function(){
   $('div.level input').val('');
   $('div.level span').text('');
+  var employee = JSON.parse(localStorage['employee'])
+  $html = '';
+  $html += "<option selected value=''>Choose branch manager</option>"
+  for (var i = 0; i < employee.length; i++) {
+    $html +="<option value=" + employee[i].email + ">"+ employee[i].name + "</option>";
+  }
+  $('#level_person').html($html);
   $('.level').modal('show');
 })
 $(document).on('click','#employee',function(){
@@ -104,8 +111,28 @@ $(document).on('click','.authorization_submit', function(){
     $('#error_level_name').text('Pls Enter authorization level name');
     return
   }
+  if ($('#level_person').val() == '') {
+    $('#error_level_person').text('Pls select authorized person');
+    return
+  }else{ $('#error_level_person').text('') }
+  if ($('#level_email').val() == '') {
+    $('#error_level_email').text('Pls Enter email');
+    return
+  }else{ $('#error_level_email').text('') }
+  if ($('#level_password').val() == '') {
+    $('#error_level_password').text('Pls Enter password');
+    return
+  }else{ $('#error_level_password').text('') }
+  if ($('#level_number').val() == '') {
+    $('#error_level_number').text('Pls Enter contact number');
+    return
+  }else{ $('#error_level_number').text('') }
   var level = {
-    name : $('#authorization_level').val()
+    name : $('#authorization_level').val(),
+    person : $('#level_person').val(),
+    email : $('#level_email').val(),
+    password : $('#level_password').val(),
+    number : $('#level_number').val(),
   };
   localStore('level',level);
   $('.level').modal('hide');
@@ -169,6 +196,7 @@ $('.show_branch').click(function(){
   $('#show_branch').modal();
 });
 $('.show_level').click(function(){
+  var employee_data = localStorage['employee'] ? JSON.parse(localStorage['employee']) : [];
   var data = localStorage['level'] ? JSON.parse(localStorage['level']) : [];
   $html = '';
   for (var i = 0; i < data.length; i++) {
@@ -176,6 +204,12 @@ $('.show_level').click(function(){
     "<td>"+ (i+1) + "</td>"+
     "<td>"+ data[i].name + "</td>"+
     +"</tr>";
+    for (var j = 0; j < employee_data.length; j++) {
+      if (employee_data[j].email == data[i].person) {
+        console.log(employee_data[j].name)
+        $html += "<td>"+ employee_data[j].name +"</td>"
+      }
+    } 
   }
   $('#level_data').html($html);
   $('#show_level').modal();
