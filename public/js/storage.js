@@ -139,6 +139,7 @@ $(document).on('click','.employee_submit', function(){
   $('button#level').attr('disabled', false)
   $('button.show_branch').attr('disabled', false) 
   $('button.show_level').attr('disabled', false)
+  $('button.show_employee').attr('disabled', false)
   $('.employee').modal('hide');
 });
 $('.show_branch').click(function(){
@@ -199,6 +200,7 @@ $(document).ready(function(){
     $('button#level').attr('disabled', true)
     $('button.show_level').attr('disabled', true) 
     $('button.show_branch').attr('disabled', true)
+    $('button.show_employee').attr('disabled', true)
   } 
 })
 function validateEmail($email) {
