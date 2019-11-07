@@ -222,6 +222,9 @@ $('.show_employee').click(function(){
     "<td>"+ (i+1) + "</td>"+
     "<td>"+ data[i].name + "</td>"+
     "<td>"+ data[i].email + "</td>"+
+    "<td> <a class='add' title='Add' data-toggle='tooltip'><i class='material-icons'>&#xE03B;</i></a>"+
+          "<a class='edit' title='Edit' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>"+
+          "<a class='delete' title='Delete' data-toggle='tooltip'><i class='material-icons'>&#xE872;</i></a> </td>"
     +"</tr>";
   }
   $('#employee_data').html($html);
@@ -263,3 +266,10 @@ $(document).on('keyup','#employee_email', function(){
     }else{$('#error_employee_email').text('') }
   }
 })
+$(document).on("click", ".edit", function(){    
+  $(this).parents("tr").find("td:not(:last-child)").each(function(){
+    $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+  });   
+  $(this).parents("tr").find(".add, .edit").toggle();
+  $(".add-new").attr("disabled", "disabled");
+});

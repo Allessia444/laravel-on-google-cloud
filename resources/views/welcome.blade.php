@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{!! asset('css/bootstrap.min.css') !!}">
   <link rel="stylesheet" href="{!! asset('css/jquery.steps.css') !!}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="{!! asset('js/jquery.min.js') !!}"></script>
   <script src="{!! asset('js/popper.min.js') !!}"></script>
   <script src="{!! asset('js/bootstrap.min.js') !!}"></script>
@@ -14,6 +17,30 @@
   <style type="text/css">
     .error{
       color: red;
+    }
+    table.table td a.add {
+        color: #27C46B;
+    }
+    table.table td a.edit {
+        color: #FFC107;
+    }
+    table.table td a.delete {
+        color: #E34724;
+    }
+    table.table td a {
+      cursor: pointer;
+      display: inline-block;
+      margin: 0 5px;
+      min-width: 24px;
+    }
+    table.table td a.add i {
+      font-size: 24px;
+      margin-right: -1px;
+      position: relative;
+      top: 3px;
+    } 
+    table.table td .add {
+      display: none;
     }
   </style>
 </head>
@@ -310,6 +337,7 @@
                   <th scope="col">No</th>
                   <th scope="col">Name</th>
                   <th scope="col">Email</th>
+                  <th scope="col">Action</th>                  
                 </tr>
               </thead>
               <tbody id="employee_data">
