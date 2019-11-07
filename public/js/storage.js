@@ -185,5 +185,5 @@ function localGet(key) {
 }
 $(document).ready(function(){
   $data = localStorage['employee'] ? JSON.parse(localStorage['employee']) : [];
-  $data.length == 0 ? $('button#branch').attr('disabled', true) $('button#level').attr('disabled', true) $('button.show_branch').attr('disabled', true) $('button.show_level').attr('disabled', true) : $('button#branch').attr('disabled', false)
+  $data.length == 0 ? $('button#branch').attr('disabled', true) : $('button#branch').attr('disabled', false)
 })
