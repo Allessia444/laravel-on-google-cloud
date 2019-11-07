@@ -117,7 +117,13 @@ $(document).on('click','.employee_submit', function(){
   if ($('#employee_email').val() == '') {
     $('#error_employee_email').text('Pls Enter email');
     return
-  }else{ $('#error_employee_email').text('') }
+  }else{ 
+    if( !validateEmail($('#employee_email').val())) { 
+      $('#error_employee_email').text('Enter valid email address') 
+      return
+    }
+    $('#error_employee_email').text('') 
+  }
   if ($('#employee_password').val() == '') {
     $('#error_employee_password').text('Pls Enter password');
     return
@@ -130,6 +136,9 @@ $(document).on('click','.employee_submit', function(){
   };
   localStore('employee',employee);
   $('button#branch').attr('disabled', false)
+  $('button#level').attr('disabled', false)
+  $('button.show_branch').attr('disabled', false) 
+  $('button.show_level').attr('disabled', false)
   $('.employee').modal('hide');
 });
 $('.show_branch').click(function(){
@@ -185,5 +194,14 @@ function localGet(key) {
 }
 $(document).ready(function(){
   $data = localStorage['employee'] ? JSON.parse(localStorage['employee']) : [];
-  $data.length == 0 ? $('button#branch').attr('disabled', true) : $('button#branch').attr('disabled', false)
+  if($data.length == 0){
+    $('button#branch').attr('disabled', true) 
+    $('button#level').attr('disabled', true)
+    $('button.show_level').attr('disabled', true) 
+    $('button.show_branch').attr('disabled', true)
+  } 
 })
+function validateEmail($email) {
+  var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+  return emailReg.test( $email );
+}

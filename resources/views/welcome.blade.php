@@ -18,7 +18,7 @@
   </style>
 </head>
 <body>
-
+<div class="container mt-3">
   <form id="example-form" action="#">
     <div>
       <h3>General</h3>
@@ -90,6 +90,7 @@
       </section>
     </div>
   </form>
+</div>
   <div class="modal fade branch" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
