@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/step-wizard', function () {
-    return view('welcome');
-});
+// Route::get('/step-wizard', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
