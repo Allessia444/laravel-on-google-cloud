@@ -123,7 +123,7 @@
               </div>
               <div class="form-group">
                 <label for="branch_password">password</label>
-                <input type="text" class="form-control required" id="branch_password" aria-describedby="emailHelp" placeholder="Enter branch password..." name="branch_password">
+                <input type="password" class="form-control required" id="branch_password" aria-describedby="emailHelp" placeholder="Enter branch password..." name="branch_password">
                 <span id="error_branch_password" class="error"></span>
               </div>
               <div class="form-group">
@@ -226,7 +226,7 @@
                 <tr>
                   <th scope="col">No</th>
                   <th scope="col">name</th>
-                  {{-- <th scope="col">manager</th> --}}
+                  <th scope="col">manager</th>
                 </tr>
               </thead>
               <tbody id="branch_data">

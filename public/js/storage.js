@@ -1,3 +1,4 @@
+var employee_data = localStorage['employee'] ? JSON.parse(localStorage['employee']) : [];
 $(document).on('click','#branch',function(){
   $('div.branch input').val('');
   $('div.branch span').text('');
@@ -122,6 +123,12 @@ $(document).on('click','.employee_submit', function(){
       $('#error_employee_email').text('Enter valid email address') 
       return
     }
+    for (var i = 0; i < employee_data.length; i++) {
+      if (employee_data[i].email == $('#employee_email').val()) {
+        $('#error_employee_email').text('Email address alredy exits') 
+        return
+      }else{$('#error_employee_email').text('') }
+    }
     $('#error_employee_email').text('') 
   }
   if ($('#employee_password').val() == '') {
@@ -143,6 +150,7 @@ $(document).on('click','.employee_submit', function(){
   $('.employee').modal('hide');
 });
 $('.show_branch').click(function(){
+  var employee_data = localStorage['employee'] ? JSON.parse(localStorage['employee']) : [];
   var data = localStorage['branch'] ? JSON.parse(localStorage['branch']) : [];
   $html = '';
   for (var i = 0; i < data.length; i++) {
@@ -150,6 +158,12 @@ $('.show_branch').click(function(){
     "<td>"+ (i+1) + "</td>"+
     "<td>"+ data[i].name + "</td>"+
     +"</tr>";
+    for (var j = 0; j < employee_data.length; j++) {
+      if (employee_data[j].email == data[i].manager) {
+        console.log(employee_data[j].name)
+        $html += "<td>"+ employee_data[j].name +"</td>"
+      }
+    } 
   }
   $('#branch_data').html($html);
   $('#show_branch').modal();
@@ -207,3 +221,11 @@ function validateEmail($email) {
   var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
   return emailReg.test( $email );
 }
+$(document).on('keyup','#employee_email', function(){
+  for (var i = 0; i < employee_data.length; i++) {
+    if (employee_data[i].email == $('#employee_email').val()) {
+      $('#error_employee_email').text('Email address alredy exits') 
+      return
+    }else{$('#error_employee_email').text('') }
+  }
+})
