@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{!! asset('css/bootstrap.min.css') !!}">
   <link rel="stylesheet" href="{!! asset('css/jquery.steps.css') !!}">
+  <link rel="stylesheet" href="{!! asset('css/table.css') !!}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -14,35 +15,6 @@
   <script src="{!! asset('js/bootstrap.min.js') !!}"></script>
   <script src="{!! asset('js/jquery.steps.min.js') !!}"></script>
   <script src="{!! asset('js/jquery.validate.min.js') !!}"></script>
-  <style type="text/css">
-    .error{
-      color: red;
-    }
-    table.table td a.add {
-        color: #27C46B;
-    }
-    table.table td a.edit {
-        color: #FFC107;
-    }
-    table.table td a.delete {
-        color: #E34724;
-    }
-    table.table td a {
-      cursor: pointer;
-      display: inline-block;
-      margin: 0 5px;
-      min-width: 24px;
-    }
-    table.table td a.add i {
-      font-size: 24px;
-      margin-right: -1px;
-      position: relative;
-      top: 3px;
-    } 
-    table.table td .add {
-      display: none;
-    }
-  </style>
 </head>
 <body>
 <div class="container mt-3">
@@ -237,8 +209,8 @@
               </div>
               <div class="form-group">
                 <label for="employee_email">Email</label>
-                <input type="email" class="form-control" id="employee_email" aria-describedby="emailHelp" placeholder="Enter employee email..." name="employee_email">
-                <span id="error_employee_email" class="error"></span>
+                <input type="email" class="form-control employee_email" id="employee_email" aria-describedby="emailHelp" placeholder="Enter employee email..." name="employee_email">
+                <span class="error_employee_email error"></span>
               </div>
               <div class="form-group">
                 <label for="employee_password">Password</label>
@@ -331,12 +303,12 @@
             </button>
           </div>
           <div class="modal-body">
-            <table class="table table-striped">
+            <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th scope="col">No</th>
                   <th scope="col">Name</th>
                   <th scope="col">Email</th>
+                  <th scope="col">Contact number</th>
                   <th scope="col">Action</th>                  
                 </tr>
               </thead>
