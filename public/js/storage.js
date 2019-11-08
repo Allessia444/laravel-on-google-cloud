@@ -136,26 +136,33 @@ $(document).on('click','.authorization_submit', function(){
   localStore('level',level);
   $('.level').modal('hide');
 });
+$(document).on('keyup','#employee_contact_number',function(e)
+{
+  if (/\D/g.test(this.value))
+  {
+    this.value = this.value.replace(/\D/g, '');
+  }
+});
 $(document).on('click','.employee_submit', function(){
   if ($('#employee_name').val() == '') {
     $('#error_employee_name').text('Pls Enter name');
     return
   }else{ $('#error_employee_name').text('') }
-  if ($('#employee_email').val() == '') {
-    $('#error_employee_email').text('Pls Enter email');
+  if ($('.employee_email').val() == '') {
+    $('.error_employee_email').text('Pls Enter email');
     return
   }else{ 
-    if( !validateEmail($('#employee_email').val())) { 
-      $('#error_employee_email').text('Enter valid email address') 
+    if( !validateEmail($('.employee_email').val())) { 
+      $('.error_employee_email').text('Enter valid email address') 
       return
     }
     for (var i = 0; i < employee_data.length; i++) {
-      if (employee_data[i].email == $('#employee_email').val()) {
-        $('#error_employee_email').text('Email address alredy exits') 
+      if (employee_data[i].email == $('.employee_email').val()) {
+        $('.error_employee_email').text('Email address alredy exits') 
         return
-      }else{$('#error_employee_email').text('') }
+      }else{$('.error_employee_email').text('') }
     }
-    $('#error_employee_email').text('') 
+    $('.error_employee_email').text('') 
   }
   if ($('#employee_password').val() == '') {
     $('#error_employee_password').text('Pls Enter password');
@@ -314,7 +321,7 @@ $(document).on("click", ".add", function(){
       if(!validateEmail($(this).val()))
       {
         $(this).addClass("error");
-        $('.error_email').text("pls valis email address")
+        $('.error_employee_email').text("pls valid email address")
         empty = true;
         return
       }
