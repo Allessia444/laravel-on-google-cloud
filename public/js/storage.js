@@ -126,7 +126,9 @@ $(document).on('click','.authorization_submit', function(){
     $('#error_level_number').text('Pls Enter contact number');
     return
   }else{ $('#error_level_number').text('') }
+  var id = Math.floor(Math.random() * (10000 - 1 + 1)) + 1
   var level = {
+    id: id,
     name : $('#authorization_level').val(),
     person : $('#level_person').val(),
     email : $('#level_email').val(),
@@ -144,6 +146,7 @@ $(document).on('keyup','#employee_contact_number',function(e)
   }
 });
 $(document).on('click','.employee_submit', function(){
+  var employee_data = localStorage['employee'] ? JSON.parse(localStorage['employee']) : [];
   if ($('#employee_name').val() == '') {
     $('#error_employee_name').text('Pls Enter name');
     return
@@ -190,14 +193,18 @@ $('.show_branch').click(function(){
   $html = '';
   for (var i = 0; i < data.length; i++) {
     $html +="<tr>"+
-    "<td>"+ (i+1) + "</td>"+
-    "<td>"+ data[i].name + "</td>"+
-    +"</tr>";
+    "<td class='id' style='display:none'>"+ data[i].id + "</td>"+
+    "<td class='name'>"+ data[i].name + "</td>"+
+    "<td class='email'>"+ data[i].email + "</td>"
     for (var j = 0; j < employee_data.length; j++) {
       if (employee_data[j].email == data[i].manager) {
         $html += "<td>"+ employee_data[j].name +"</td>"
       }
     } 
+    $html += "<td> <a class='branch_add add_symbol' title='Save' data-toggle='tooltip'><i class='material-icons'>&#xE03B;</i></a>"+
+          "<a class='branch_edit edit_symbol' title='Edit' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>"+
+          "<a class='branch_delete delete_symbol' title='Delete' data-toggle='tooltip'><i class='material-icons'>&#xE872;</i></a> </td>"
+    +"</tr>";
   }
   $('#branch_data').html($html);
   $('#show_branch').modal();
@@ -208,14 +215,18 @@ $('.show_level').click(function(){
   $html = '';
   for (var i = 0; i < data.length; i++) {
     $html +="<tr>"+
-    "<td>"+ (i+1) + "</td>"+
-    "<td>"+ data[i].name + "</td>"+
-    +"</tr>";
+    "<td class='id' style='display:none'>"+ data[i].id + "</td>"+
+    "<td class='name'>"+ data[i].name + "</td>"+
+    "<td class='email'>"+ data[i].email +"</td>"
     for (var j = 0; j < employee_data.length; j++) {
       if (employee_data[j].email == data[i].person) {
         $html += "<td>"+ employee_data[j].name +"</td>"
       }
-    } 
+    }
+    $html += "<td> <a class='level_add add_symbol' title='Save' data-toggle='tooltip'><i class='material-icons'>&#xE03B;</i></a>"+
+          "<a class='level_edit edit_symbol' title='Edit' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>"+
+          "<a class='level_delete delete_symbol' title='Delete' data-toggle='tooltip'><i class='material-icons'>&#xE872;</i></a> </td>"
+    +"</tr>";
   }
   $('#level_data').html($html);
   $('#show_level').modal();
@@ -229,9 +240,9 @@ $('.show_employee').click(function(){
     "<td class='name'>"+ data[i].name + "</td>"+
     "<td class='email'>"+ data[i].email + "</td>"+
     "<td class='contact_number'>"+ data[i].contact_number + "</td>"+
-    "<td> <a class='add' title='Save' data-toggle='tooltip'><i class='material-icons'>&#xE03B;</i></a>"+
-          "<a class='edit' title='Edit' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>"+
-          "<a class='delete' title='Delete' data-toggle='tooltip'><i class='material-icons'>&#xE872;</i></a> </td>"
+    "<td> <a class='add add_symbol' title='Save' data-toggle='tooltip'><i class='material-icons'>&#xE03B;</i></a>"+
+          "<a class='edit edit_symbol' title='Edit' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>"+
+          "<a class='delete delete_symbol' title='Delete' data-toggle='tooltip'><i class='material-icons'>&#xE872;</i></a> </td>"
     +"</tr>";
   }
   $('#employee_data').html($html);
@@ -262,7 +273,8 @@ $(document).ready(function(){
   } 
 })
 function validateEmail($email) {
-  var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+  //var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-])?$/;
+  var emailReg = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
   return emailReg.test( $email );
 }
 $(document).on('keyup','.employee_email', function(){
@@ -275,7 +287,7 @@ $(document).on('keyup','.employee_email', function(){
     }else{ $('.error_employee_email').text('') }
   }
 })
-$(document).on("click", ".edit", function(){    
+$(document).on("click", ".edit_symbol", function(){    
   $(this).parents("tr").find("td:not(:last-child)").each(function(){
     if (this.className == 'email'){
       $(this).html('<input type="email" class="form-control employee_email" value="' + $(this).text() + '">');
@@ -284,7 +296,7 @@ $(document).on("click", ".edit", function(){
       $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
     }
   });   
-  $(this).parents("tr").find(".add, .edit").toggle();
+  $(this).parents("tr").find(".add_symbol, .edit_symbol").toggle();
   $(".add-new").attr("disabled", "disabled");
 });
 $(document).on("click", ".delete", function(){
@@ -292,6 +304,7 @@ $(document).on("click", ".delete", function(){
   $(this).parents("tr").remove();
   $(".add-new").removeAttr("disabled");
   var employee_id = $(this).parents("tr").children('td.id').text();
+
   employee.find(function(element) { 
     if(element.id == employee_id){
       employee.pop(element)
@@ -349,7 +362,6 @@ $(document).on("click", ".add", function(){
   var employee_email = $(this).parents("tr").children('td.email').text();
   var employee_name = $(this).parents("tr").children('td.name').text();
   var employee_contact_number = $(this).parents("tr").children('td.contact_number').text();
-  var data = employee.find(employee => employee.id === employee_id)
   employee.find(function(element) { 
     if(element.id == employee_id){
       element.name = employee_name
@@ -359,4 +371,150 @@ $(document).on("click", ".add", function(){
   });
   window.localStorage.setItem('employee', JSON.stringify(employee)); 
 
+});
+$(document).on("click", ".level_add", function(){
+  var level = localStorage['level'] ? JSON.parse(localStorage['level']) : [];
+  var level_id = $(this).parents("tr").children('td.id').children('input').val();
+  var empty = false;
+  var input = $(this).parents("tr").find('input[type="text"]');
+  var input_email = $(this).parents("tr").find('input[type="email"]');
+  input.each(function(){
+    if(!$(this).val()){
+      $(this).addClass("error");
+      empty = true;
+    } else{
+      $(this).removeClass("error");
+    }
+  });
+  input_email.each(function(){
+    if(!$(this).val()){
+      $(this).addClass("error");
+      empty = true;
+    } else{
+      if(!validateEmail($(this).val()))
+      {
+        $(this).addClass("error");
+        $('.error_level_email').text("pls valid email address")
+        empty = true;
+        return
+      }
+      for (var i = 0; i < level.length; i++) {
+        if (level[i].email == $(this).val() && level[i].id != level_id) {
+          $('.error_level_email').text('Email address alredy exits') 
+          empty = true;
+          return
+        }
+      }
+      $(this).removeClass("error");
+    }
+  });
+  $(this).parents("tr").find(".error").first().focus();
+  if(!empty){
+    input.each(function(){
+      $(this).parent("td").html($(this).val());
+    });
+    input_email.each(function(){
+      $(this).parent("td").html($(this).val());
+    });     
+    $(this).parents("tr").find(".add_symbol, .edit_symbol").toggle();
+    $(".add-new").removeAttr("disabled");
+  }
+  var level_email = $(this).parents("tr").children('td.email').text();
+  var level_name = $(this).parents("tr").children('td.name').text();
+  var level_contact_number = $(this).parents("tr").children('td.level_number').text();
+  level.find(function(element) { 
+    if(element.id == level_id){
+      element.name = level_name
+      element.email = level_email
+      element.contact_number = level_contact_number
+    }
+  });
+  window.localStorage.setItem('level', JSON.stringify(level)); 
+
+});
+$(document).on("click", ".level_delete", function(){
+  var level = localStorage['level'] ? JSON.parse(localStorage['level']) : [];
+  $(this).parents("tr").remove();
+  $(".add-new").removeAttr("disabled");
+  var level_id = $(this).parents("tr").children('td.id').text();
+
+  level.find(function(element) { 
+    if(element.id == level_id){
+      level.pop(element)
+    }
+  });
+  window.localStorage.setItem('level', JSON.stringify(level)); 
+});
+$(document).on("click", ".branch_add", function(){
+  var branch = localStorage['branch'] ? JSON.parse(localStorage['branch']) : [];
+  var level_id = $(this).parents("tr").children('td.id').children('input').val();
+  var empty = false;
+  var input = $(this).parents("tr").find('input[type="text"]');
+  var input_email = $(this).parents("tr").find('input[type="email"]');
+  input.each(function(){
+    if(!$(this).val()){
+      $(this).addClass("error");
+      empty = true;
+    } else{
+      $(this).removeClass("error");
+    }
+  });
+  input_email.each(function(){
+    if(!$(this).val()){
+      $(this).addClass("error");
+      empty = true;
+    } else{
+      if(!validateEmail($(this).val()))
+      {
+        $(this).addClass("error");
+        $('.error_branch_email').text("pls valid email address")
+        empty = true;
+        return
+      }
+      for (var i = 0; i < level.length; i++) {
+        if (level[i].email == $(this).val() && level[i].id != level_id) {
+          $('.error_branch_email').text('Email address alredy exits') 
+          empty = true;
+          return
+        }
+      }
+      $(this).removeClass("error");
+    }
+  });
+  $(this).parents("tr").find(".error").first().focus();
+  if(!empty){
+    input.each(function(){
+      $(this).parent("td").html($(this).val());
+    });
+    input_email.each(function(){
+      $(this).parent("td").html($(this).val());
+    });     
+    $(this).parents("tr").find(".add_symbol, .edit_symbol").toggle();
+    $(".add-new").removeAttr("disabled");
+  }
+  var branch_email = $(this).parents("tr").children('td.email').text();
+  var branch_name = $(this).parents("tr").children('td.name').text();
+  //var branch_contact_number = $(this).parents("tr").children('td.level_number').text();
+  branch.find(function(element) { 
+    if(element.id == level_id){
+      element.name = branch_name
+      element.email = branch_email
+      //element.contact_number = employee_contact_number
+    }
+  });
+  window.localStorage.setItem('branch', JSON.stringify(branch)); 
+
+});
+$(document).on("click", ".branch_delete", function(){
+  var branch = localStorage['branch'] ? JSON.parse(localStorage['branch']) : [];
+  $(this).parents("tr").remove();
+  $(".add-new").removeAttr("disabled");
+  var branch_id = $(this).parents("tr").children('td.id').text();
+
+  branch.find(function(element) { 
+    if(element.id == branch_id){
+      branch.pop(element)
+    }
+  });
+  window.localStorage.setItem('branch', JSON.stringify(branch)); 
 });

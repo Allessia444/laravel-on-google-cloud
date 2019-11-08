@@ -243,12 +243,13 @@
             </button>
           </div>
           <div class="modal-body">
-            <table class="table table-striped">
+            <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th scope="col">No</th>
-                  <th scope="col">name</th>
-                  <th scope="col">manager</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Manager</th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody id="branch_data">
@@ -273,12 +274,13 @@
             </button>
           </div>
           <div class="modal-body">
-            <table class="table table-striped">
+            <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th scope="col">No</th>
                   <th scope="col">name</th>
+                  <th scope="col">Email</th>
                   <th scope="col">Person</th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody id="level_data">
