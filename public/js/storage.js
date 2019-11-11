@@ -75,6 +75,7 @@ $('#state').val(localStorage['state']);
 $('#city').val(localStorage['city']);
 $('#country').val(localStorage['country']);
 $(document).on('click','.branch_submit', function(){
+  var branch_data = localStorage['branch'] ? JSON.parse(localStorage['branch']) : [];
   if ($('#branch_name').val() == '') {
     $('#error_branch_name').text('Pls Enter name');
     return
@@ -84,9 +85,21 @@ $(document).on('click','.branch_submit', function(){
     return
   }else{ $('#error_branch_manager').text('') }
   if ($('#branch_email').val() == '') {
-    $('#error_branch_email').text('Pls Enter email');
+    $('.error_branch_email').text('Pls Enter email');
     return
-  }else{ $('#error_branch_email').text('') }
+  }else{ 
+    if( !validateEmail($('#branch_email').val())) { 
+      $('.error_branch_email').text('Enter valid email address') 
+      return
+    }
+    for (var i = 0; i < branch_data.length; i++) {
+      if (branch_data[i].email == $('#branch_email').val()) {
+        $('.error_branch_email').text('Email address alredy exits') 
+        return
+      }else{$('.error_branch_email').text('') }
+    }
+    $('.error_branch_email').text('') 
+  }
   if ($('#branch_password').val() == '') {
     $('#error_branch_password').text('Pls Enter password');
     return
@@ -95,7 +108,9 @@ $(document).on('click','.branch_submit', function(){
     $('#error_branch_location').text('Pls Enter location');
     return
   }else{ $('#error_branch_location').text('') }
+  var id = Math.floor(Math.random() * (10000 - 1 + 1)) + 1
   var branch = {
+    id : id,
     name : $('#branch_name').val(),
     manager : $('#branch_manager').val(),
     email : $('#branch_email').val(),
@@ -106,6 +121,7 @@ $(document).on('click','.branch_submit', function(){
   $('.branch').modal('hide');
 });
 $(document).on('click','.authorization_submit', function(){
+  var level_data = localStorage['level'] ? JSON.parse(localStorage['level']) : [];
   if ($('#authorization_level').val() == '') {
     $('#error_level_name').text('Pls Enter authorization level name');
     return
@@ -117,7 +133,19 @@ $(document).on('click','.authorization_submit', function(){
   if ($('#level_email').val() == '') {
     $('#error_level_email').text('Pls Enter email');
     return
-  }else{ $('#error_level_email').text('') }
+  }else{ 
+    if( !validateEmail($('#level_email').val())) { 
+      $('.error_level_email').text('Enter valid email address') 
+      return
+    }
+    for (var i = 0; i < level_data.length; i++) {
+      if (level_data[i].email == $('#level_email').val()) {
+        $('.error_level_email').text('Email address alredy exits') 
+        return
+      }else{$('.error_level_email').text('') }
+    }
+    $('.error_level_email').text('') 
+  }
   if ($('#level_password').val() == '') {
     $('#error_level_password').text('Pls Enter password');
     return
@@ -138,7 +166,7 @@ $(document).on('click','.authorization_submit', function(){
   localStore('level',level);
   $('.level').modal('hide');
 });
-$(document).on('keyup','#employee_contact_number',function(e)
+$(document).on('keyup','.number',function(e)
 {
   if (/\D/g.test(this.value))
   {
@@ -198,7 +226,7 @@ $('.show_branch').click(function(){
     "<td class='email'>"+ data[i].email + "</td>"
     for (var j = 0; j < employee_data.length; j++) {
       if (employee_data[j].email == data[i].manager) {
-        $html += "<td>"+ employee_data[j].name +"</td>"
+        $html += "<td class='branch_manager'>"+ employee_data[j].name +"</td>"
       }
     } 
     $html += "<td> <a class='branch_add add_symbol' title='Save' data-toggle='tooltip'><i class='material-icons'>&#xE03B;</i></a>"+
@@ -240,9 +268,9 @@ $('.show_employee').click(function(){
     "<td class='name'>"+ data[i].name + "</td>"+
     "<td class='email'>"+ data[i].email + "</td>"+
     "<td class='contact_number'>"+ data[i].contact_number + "</td>"+
-    "<td> <a class='add add_symbol' title='Save' data-toggle='tooltip'><i class='material-icons'>&#xE03B;</i></a>"+
-          "<a class='edit edit_symbol' title='Edit' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>"+
-          "<a class='delete delete_symbol' title='Delete' data-toggle='tooltip'><i class='material-icons'>&#xE872;</i></a> </td>"
+    "<td> <a class='employee_add add_symbol' title='Save' data-toggle='tooltip'><i class='material-icons'>&#xE03B;</i></a>"+
+          "<a class='employee_edit edit_symbol' title='Edit' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>"+
+          "<a class='employee_delete delete_symbol' title='Delete' data-toggle='tooltip'><i class='material-icons'>&#xE872;</i></a> </td>"
     +"</tr>";
   }
   $('#employee_data').html($html);
@@ -287,11 +315,31 @@ $(document).on('keyup','.employee_email', function(){
     }else{ $('.error_employee_email').text('') }
   }
 })
-$(document).on("click", ".edit_symbol", function(){    
+$(document).on('keyup','.branch_email', function(){
+  var branch = localStorage['branch'] ? JSON.parse(localStorage['branch']) : [];
+  var branch_id = $(this).parents("tr").children('td.id').children('input').val();
+  for (var i = 0; i < branch.length; i++) {
+    if (branch[i].email == $(this).val() && branch[i].id != branch_id) {
+      $('.error_branch_email').text('Email address alredy exits') 
+      return
+    }else{ $('.error_branch_email').text('') }
+  }
+})
+$(document).on('keyup','.level_email', function(){
+  var level = localStorage['level'] ? JSON.parse(localStorage['level']) : [];
+  var level_id = $(this).parents("tr").children('td.id').children('input').val();
+  for (var i = 0; i < level.length; i++) {
+    if (level[i].email == $(this).val() && level[i].id != level_id) {
+      $('.error_level_email').text('Email address alredy exits') 
+      return
+    }else{ $('.error_level_email').text('') }
+  }
+})
+$(document).on("click", ".employee_edit", function(){    
   $(this).parents("tr").find("td:not(:last-child)").each(function(){
     if (this.className == 'email'){
-      $(this).html('<input type="email" class="form-control employee_email" value="' + $(this).text() + '">');
-      $(this).append('<span class="error_employee_email error"></span>')
+      $(this).html('<input type="email" class="form-control employee_email email" value="' + $(this).text() + '">');
+      $(this).append('<span class="error_employee_email error error_email"></span>')
     }else{
       $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
     }
@@ -299,7 +347,41 @@ $(document).on("click", ".edit_symbol", function(){
   $(this).parents("tr").find(".add_symbol, .edit_symbol").toggle();
   $(".add-new").attr("disabled", "disabled");
 });
-$(document).on("click", ".delete", function(){
+$(document).on("click", ".branch_edit", function(){
+var employee = localStorage['employee'] ? JSON.parse(localStorage['employee']) : [];    
+  $(this).parents("tr").find("td:not(:last-child)").each(function(){
+    if (this.className == 'email'){
+      $(this).html('<input type="email" class="form-control branch_email" value="' + $(this).text() + '">');
+      $(this).append('<span class="error_branch_email error"></span>')
+    }else{
+      if (this.className == 'branch_manager') {
+        $html = ''
+        for (var i = 0; i < employee.length; i++) {
+            $html += "<option value="+ employee[i].email +">"+ employee[i].name +"</option>"
+        }
+        $(this).html('<select class="selectpicker" data-live-search="true" name="branch_manager">'+ $html +'</select>')
+        $('.selectpicker').selectpicker();
+      }else{
+        $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+      }
+    }
+  });   
+  $(this).parents("tr").find(".add_symbol, .edit_symbol").toggle();
+  $(".add-new").attr("disabled", "disabled");
+});
+$(document).on("click", ".level_edit", function(){    
+  $(this).parents("tr").find("td:not(:last-child)").each(function(){
+    if (this.className == 'email'){
+      $(this).html('<input type="email" class="form-control level_email" value="' + $(this).text() + '">');
+      $(this).append('<span class="error_level_email error"></span>')
+    }else{
+      $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+    }
+  });   
+  $(this).parents("tr").find(".add_symbol, .edit_symbol").toggle();
+  $(".add-new").attr("disabled", "disabled");
+});
+$(document).on("click", ".employee_delete", function(){
   var employee = localStorage['employee'] ? JSON.parse(localStorage['employee']) : [];
   $(this).parents("tr").remove();
   $(".add-new").removeAttr("disabled");
@@ -312,7 +394,7 @@ $(document).on("click", ".delete", function(){
   });
   window.localStorage.setItem('employee', JSON.stringify(employee)); 
 });
-$(document).on("click", ".add", function(){
+$(document).on("click", ".employee_add", function(){
   var employee = localStorage['employee'] ? JSON.parse(localStorage['employee']) : [];
   var employee_id = $(this).parents("tr").children('td.id').children('input').val();
   var empty = false;
@@ -447,9 +529,10 @@ $(document).on("click", ".level_delete", function(){
 });
 $(document).on("click", ".branch_add", function(){
   var branch = localStorage['branch'] ? JSON.parse(localStorage['branch']) : [];
-  var level_id = $(this).parents("tr").children('td.id').children('input').val();
+  var branch_id = $(this).parents("tr").children('td.id').children('input').val();
   var empty = false;
   var input = $(this).parents("tr").find('input[type="text"]');
+  var select = $(this).parents("tr").find('select option:selected');
   var input_email = $(this).parents("tr").find('input[type="email"]');
   input.each(function(){
     if(!$(this).val()){
@@ -457,7 +540,12 @@ $(document).on("click", ".branch_add", function(){
       empty = true;
     } else{
       $(this).removeClass("error");
+      empty = false;
     }
+  });
+  var branch_manager_name
+  select.each(function(){
+    branch_manager_name = $(this).val();
   });
   input_email.each(function(){
     if(!$(this).val()){
@@ -471,14 +559,15 @@ $(document).on("click", ".branch_add", function(){
         empty = true;
         return
       }
-      for (var i = 0; i < level.length; i++) {
-        if (level[i].email == $(this).val() && level[i].id != level_id) {
+      for (var i = 0; i < branch.length; i++) {
+        if (branch[i].email == $(this).val() && branch[i].id != branch_id) {
           $('.error_branch_email').text('Email address alredy exits') 
           empty = true;
           return
         }
       }
       $(this).removeClass("error");
+      empty = false;
     }
   });
   $(this).parents("tr").find(".error").first().focus();
@@ -488,6 +577,9 @@ $(document).on("click", ".branch_add", function(){
     });
     input_email.each(function(){
       $(this).parent("td").html($(this).val());
+    });
+    select.each(function(){
+      $(this).parent().parent().parent("td").html($(this).text());
     });     
     $(this).parents("tr").find(".add_symbol, .edit_symbol").toggle();
     $(".add-new").removeAttr("disabled");
@@ -496,9 +588,10 @@ $(document).on("click", ".branch_add", function(){
   var branch_name = $(this).parents("tr").children('td.name').text();
   //var branch_contact_number = $(this).parents("tr").children('td.level_number').text();
   branch.find(function(element) { 
-    if(element.id == level_id){
+    if(element.id == branch_id){
       element.name = branch_name
       element.email = branch_email
+      element.manager = branch_manager_name
       //element.contact_number = employee_contact_number
     }
   });

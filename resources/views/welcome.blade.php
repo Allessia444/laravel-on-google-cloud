@@ -10,11 +10,13 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
   <script src="{!! asset('js/jquery.min.js') !!}"></script>
   <script src="{!! asset('js/popper.min.js') !!}"></script>
   <script src="{!! asset('js/bootstrap.min.js') !!}"></script>
   <script src="{!! asset('js/jquery.steps.min.js') !!}"></script>
   <script src="{!! asset('js/jquery.validate.min.js') !!}"></script>
+  
 </head>
 <body>
 <div class="container mt-3">
@@ -47,7 +49,7 @@
         <div class="form-group">
           <div class="col-xs-6">
             <label for="contact_number">Phone number</label>
-              <input type="text" class="form-control required" name="contact_number" id="contact_number" placeholder="phone number....." title="enter your phone number">
+              <input type="text" class="form-control required number" name="contact_number" id="contact_number" placeholder="phone number....." title="enter your phone number">
           </div>
         </div>
         <div class="form-group">
@@ -118,7 +120,7 @@
               <div class="form-group">
                 <label for="branch_email">Email</label>
                 <input type="email" class="form-control required" id="branch_email" aria-describedby="emailHelp" placeholder="Enter branch email..." name="branch_email">
-                <span id="error_branch_email" class="error"></span>
+                <span class="error error_branch_email"></span>
               </div>
               <div class="form-group">
                 <label for="branch_password">password</label>
@@ -168,7 +170,7 @@
               <div class="form-group">
                 <label for="level_email">Email</label>
                 <input type="email" class="form-control required" id="level_email" aria-describedby="emailHelp" placeholder="Enter email..." name="level_email">
-                <span id="error_level_email" class="error"></span>
+                <span class="error error_level_email"></span>
               </div>
               <div class="form-group">
                 <label for="level_password">password</label>
@@ -177,7 +179,7 @@
               </div>
               <div class="form-group">
                 <label for="level_number">Contact number</label>
-                <input type="text" class="form-control required" id="level_number" aria-describedby="emailHelp" placeholder="Enter contact number..." name="level_number">
+                <input type="text" class="form-control required number" id="level_number" aria-describedby="emailHelp" placeholder="Enter contact number..." name="level_number">
                 <span id="error_level_number" class="error"></span>
               </div>
             </form>
@@ -219,7 +221,7 @@
               </div>
               <div class="form-group">
                 <label for="employee_contact_number">Contact Number</label>
-                <input type="text" class="form-control" id="employee_contact_number" aria-describedby="emailHelp" placeholder="Enter contact number..." name="employee_contact_number">
+                <input type="text" class="form-control number" id="employee_contact_number" aria-describedby="emailHelp" placeholder="Enter contact number..." name="employee_contact_number">
                 <span id="error_employee_number" class="error"></span>
               </div>
             </form>
@@ -248,7 +250,7 @@
                 <tr>
                   <th scope="col">Name</th>
                   <th scope="col">Email</th>
-                  <th scope="col">Manager</th>
+                  <th scope="col" style="width: 243px">Manager</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -325,6 +327,7 @@
       </div>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
   <script type="text/javascript" src="{!! asset('js/storage.js') !!}"></script>
 </body>
 </html>
