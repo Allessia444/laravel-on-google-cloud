@@ -45,7 +45,11 @@ class HomeController extends Controller
         $image = preg_replace('/data:image\/(.*?);base64,/','',$image); // remove the type part
         $image = str_replace(' ', '+', $image);
         $imageName = 'sketch_' . time() . '.' . $image_extension[1]; //generating unique file name;
-        File::makeDirectory('public/images');
+
+         
+          
+        File::makeDirectory(public_path().'/images/', 0777, true, true);
+          
         File::put(base_path().'/public/images/' . $imageName, base64_decode($image));
         
         
