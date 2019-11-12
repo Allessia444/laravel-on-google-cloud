@@ -48,9 +48,9 @@ class HomeController extends Controller
 
          
           
-        
+        File::makeDirectory(public_path().'/images/', 0777, true, true);
           
-        File::put(base_path().'/public/' . $imageName, base64_decode($image));
+        File::put(public_path().'/images/' . $imageName, base64_decode($image));
         
         
         
