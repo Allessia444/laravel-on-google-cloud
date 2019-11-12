@@ -57,4 +57,34 @@ class HomeController extends Controller
         
         return response($imageName,202);
     }
+
+    public function getJson()
+    {
+        return view('writetojson');
+    }
+
+    public function writeJson(Request $request)
+    {
+        $myFile = "theme.json";
+        $arr_data = array();
+        $formdata = array(
+                  'firstName'=> $request->fname,
+                  'lastName'=> $request->lname,
+                  'email'=>$request->email,
+                  'mobile'=> $request->mobile
+               );
+         $jsondata = file_get_contents(base_path($myFile));
+               $arr_data = json_decode($jsondata, true);
+               array_push($arr_data,$formdata);
+               $jsondata = json_encode($arr_data, JSON_PRETTY_PRINT);
+               
+               if(file_put_contents(base_path($myFile), $jsondata)) {
+                    echo 'Data successfully saved';
+                }
+               else {
+                    echo "error";
+               }
+
+        return response('success',202);
+    }
 }

@@ -20,5 +20,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/table', 'HomeController@table')->name('table');
 Route::get('/sketch', 'HomeController@getSketch')->name('sketch');
+Route::get('/write-to-json', 'HomeController@getJson')->name('writetojson');
+Route::post('/write-to-json', 'HomeController@writeJson')->name('writeto');
 
 Route::post('/download-sketchpad','HomeController@downloadSketch');
