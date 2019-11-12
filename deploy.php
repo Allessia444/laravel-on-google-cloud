@@ -24,11 +24,10 @@ set('writable_chmod_mode', '0777');
 
 
 // Shared files/dirs between deploys 
-add('shared_files', ['theme.json']);
+add('shared_files', []);
 add('shared_dirs', ['storage','public/tmp','public/uploads', 'public/files/shares']);
 
 // Writable dirs by web server 
-add('writable_files', ['theme.json']);
 add('writable_dirs', ['storage', 'vendor','public/tmp','public/uploads', 'public/files/shares']);
 
 // Hosts
