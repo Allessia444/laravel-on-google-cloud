@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use File;
+use Storage;
 class HomeController extends Controller
 {
     /**
@@ -49,8 +50,8 @@ class HomeController extends Controller
          
           
         // File::makeDirectory(base_path().'/public/images/', 0777, true, true);
-          
-        File::put(base_path().'/public/images/' . $imageName, base64_decode($image));
+          Storage::disk('public')->put("images/".$imageName, base64_decode($image));
+        // File::put(base_path().'/public/images/' . $imageName, base64_decode($image));
         
         
         

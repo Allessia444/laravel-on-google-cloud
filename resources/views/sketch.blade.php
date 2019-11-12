@@ -52,7 +52,8 @@
                 type: 'POST',
                 data: { file : file, "_token": "{{ csrf_token() }}"},
                 success: function(data){
-              $('#download_file').attr('href','/images/'+data);
+
+              $('#download_file').attr('href','/storage/images/'+data);
                   document.getElementById('download_file').click();
                    location.reload();
                   // $('#download-link').attr('href',data);
