@@ -60,20 +60,24 @@ $(document).on('click','.show_level',function(){
   var employee_data = localStorage['employee'] ? JSON.parse(localStorage['employee']) : [];
   var data = localStorage['level'] ? JSON.parse(localStorage['level']) : [];
   $html = '';
-  for (var i = 0; i < data.length; i++) {
-    $html +="<tr>"+
-    "<td class='id' style='display:none'>"+ data[i].id + "</td>"+
-    "<td class='name'>"+ data[i].name + "</td>"+
-    "<td class='email'>"+ data[i].email +"</td>"
-    for (var j = 0; j < employee_data.length; j++) {
-      if (employee_data[j].email == data[i].person) {
-        $html += "<td>"+ employee_data[j].name +"</td>"
+  if (data.length > 0) {
+    for (var i = 0; i < data.length; i++) {
+      $html +="<tr>"+
+      "<td class='id' style='display:none'>"+ data[i].id + "</td>"+
+      "<td class='name'>"+ data[i].name + "</td>"+
+      "<td class='email'>"+ data[i].email +"</td>"
+      for (var j = 0; j < employee_data.length; j++) {
+        if (employee_data[j].email == data[i].person) {
+          $html += "<td>"+ employee_data[j].name +"</td>"
+        }
       }
+      $html += "<td> <a class='level_add add_symbol' title='Save' data-toggle='tooltip'><i class='material-icons'>&#xE03B;</i></a>"+
+      "<a class='level_edit edit_symbol' title='Edit' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>"+
+      "<a class='level_delete delete_symbol' title='Delete' data-toggle='tooltip'><i class='material-icons'>&#xE872;</i></a> </td>"
+      +"</tr>";
     }
-    $html += "<td> <a class='level_add add_symbol' title='Save' data-toggle='tooltip'><i class='material-icons'>&#xE03B;</i></a>"+
-          "<a class='level_edit edit_symbol' title='Edit' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>"+
-          "<a class='level_delete delete_symbol' title='Delete' data-toggle='tooltip'><i class='material-icons'>&#xE872;</i></a> </td>"
-    +"</tr>";
+  }else{
+    $html += "<td colspan='4'><center><b>No Record found</b></center></td>"
   }
   $('#level_data').html($html);
   $('#show_level').modal();
@@ -83,9 +87,9 @@ $(document).on('keyup','.level_email', function(){
   var level_id = $(this).parents("tr").children('td.id').children('input').val();
   for (var i = 0; i < level.length; i++) {
     if (level[i].email == $(this).val() && level[i].id != level_id) {
-      $('.error_level_email').text('Email address alredy exits') 
+      $(this).parents("tr").children('td.email').children('span.error_level_email').text('Email address alredy exits')
       return
-    }else{ $('.error_level_email').text('') }
+    }else{ $(this).parents("tr").children('td.email').children('span.error_branch_email').text('') }
   }
 })
 $(document).on("click", ".level_edit", function(){    

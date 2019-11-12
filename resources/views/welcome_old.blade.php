@@ -30,7 +30,7 @@
     <div class="circle-inner"></div>
   </div>
   <div class="container mt-3">
-    <form id="example-form" action="#">
+    <form id="example-form" action="#" style="display: none;">
       <div>
         <h3>General</h3>
         <section>
@@ -344,7 +344,8 @@
   <script type="text/javascript" src="{!! asset('js/storage.js') !!}"></script>
   <script type="text/javascript">
     $(window).on('load',function(){
-      $('.loader').show()
+      $('.loader').hide()
+      $('form').show()
     })
   </script>
 </body>
