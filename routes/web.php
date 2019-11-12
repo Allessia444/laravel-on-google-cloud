@@ -19,3 +19,6 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/table', 'HomeController@table')->name('table');
+Route::get('/sketch', 'HomeController@getSketch')->name('sketch');
+
+Route::post('/download-sketchpad','HomeController@downloadSketch');

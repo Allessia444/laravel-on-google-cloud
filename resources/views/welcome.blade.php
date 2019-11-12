@@ -30,6 +30,7 @@
     <div class="circle-inner"></div>
   </div>
   <div class="container mt-3">
+    <a href="/sketch" class="btn btn-primary">SkecthPad</a>
     <form id="example-form" action="#" style="display: none;">
       <div>
         <h3>General</h3>
