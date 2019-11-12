@@ -1,50 +1,8 @@
 [
     {
-        "firstName": "Vijay",
-        "lastName": "reddy",
-        "email": "asdv@ymail.com",
-        "mobile": ""
-    },
-    {
-        "firstName": "ggdggg",
-        "lastName": "nvnvnv",
-        "email": "asddd@xmail.com",
-        "mobile": ""
-    },
-    {
-        "firstName": "ggdggg",
-        "lastName": "nvnvnv",
-        "email": "asddd@xmail.com",
-        "mobile": ""
-    },
-    {
-        "firstName": "ggdggg",
-        "lastName": "nvnvnv",
-        "email": "asddd@xmail.com",
-        "mobile": ""
-    },
-    {
         "firstName": "test",
         "lastName": "test",
-        "email": "test@gmail.com",
-        "mobile": "123456789"
-    },
-    {
-        "firstName": "mk",
-        "lastName": "km",
-        "email": "maulik@krishaweb.net",
-        "mobile": "1234567890"
-    },
-    {
-        "firstName": "test",
-        "lastName": "test",
-        "email": "bm@blsurveyors.com",
-        "mobile": "7389864516"
-    },
-    {
-        "firstName": "test",
-        "lastName": "test",
-        "email": "bm@blsurveyors.com",
+        "email": "new@test.com",
         "mobile": "7389864516"
     }
 ]
