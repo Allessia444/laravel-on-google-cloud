@@ -2,7 +2,7 @@
 <canvas id="canvas3"></canvas>
 </div>
 <input type="file" id="file-picker" style="display:none;">
-<button class="btn btn-primary pull-right" style="margin-right:60px;" id="save"><i class="mdi mdi-content-save mdi-24px"></i>Save</button>
+{{-- <button class="btn btn-primary pull-right" style="margin-right:60px;" id="save"><i class="mdi mdi-content-save mdi-24px"></i>Save</button> --}}
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>

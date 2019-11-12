@@ -45,7 +45,7 @@ $(document).on('click','.employee_submit', function(){
   $('button.show_employee').attr('disabled', false)
   $('.employee').modal('hide');
 });
-$('.show_employee').click(function(){
+$(document).on('click','.show_employee',function(){
   var data = localStorage['employee'] ? JSON.parse(localStorage['employee']) : [];
   $html = '';
   for (var i = 0; i < data.length; i++) {

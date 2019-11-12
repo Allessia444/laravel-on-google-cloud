@@ -56,7 +56,7 @@ $(document).on('click','.authorization_submit', function(){
   localStore('level',level);
   $('.level').modal('hide');
 });
-$('.show_level').click(function(){
+$(document).on('click','.show_level',function(){
   var employee_data = localStorage['employee'] ? JSON.parse(localStorage['employee']) : [];
   var data = localStorage['level'] ? JSON.parse(localStorage['level']) : [];
   $html = '';

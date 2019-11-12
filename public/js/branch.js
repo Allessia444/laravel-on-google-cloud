@@ -56,7 +56,7 @@ $(document).on('click','.branch_submit', function(){
   localStore('branch',branch);
   $('.branch').modal('hide');
 });
-$('.show_branch').click(function(){
+$(document).on('click','.show_branch',function(){
   var employee_data = localStorage['employee'] ? JSON.parse(localStorage['employee']) : [];
   var data = localStorage['branch'] ? JSON.parse(localStorage['branch']) : [];
   $html = '';
