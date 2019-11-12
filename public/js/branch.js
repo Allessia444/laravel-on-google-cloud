@@ -103,7 +103,7 @@ $(document).on("click", ".branch_edit", function(){
     var name = $(this).text();
     $html = ''
     for (var i = 0; i < employee.length; i++) {
-     $html += "<option value="+ employee[i].email +""+ employee[i].name == name ? 'selected active' : 'selected active' +">"+ employee[i].name +"</option>"
+     $html += "<option value="+ employee[i].email+">"+ employee[i].name +"</option>"
     }
     $(this).html('<select class="selectpicker" data-live-search="true" name="branch_manager">'+ $html +'</select>')
     $('.selectpicker').selectpicker();
