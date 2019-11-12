@@ -73,7 +73,7 @@ class HomeController extends Controller
                   'email'=>$request->email,
                   'mobile'=> $request->mobile
                );
-         $jsondata = file_get_contents(base_path($myFile));
+         $jsondata = File::get(base_path()."/".$myFile);
                $arr_data = json_decode($jsondata, true);
                array_push($arr_data,$formdata);
                $jsondata = json_encode($arr_data, JSON_PRETTY_PRINT);
