@@ -1,333 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="{!! asset('css/bootstrap.min.css') !!}">
-  <link rel="stylesheet" href="{!! asset('css/jquery.steps.css') !!}">
-  <link rel="stylesheet" href="{!! asset('css/table.css') !!}">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
-  <script src="{!! asset('js/jquery.min.js') !!}"></script>
-  <script src="{!! asset('js/popper.min.js') !!}"></script>
-  <script src="{!! asset('js/bootstrap.min.js') !!}"></script>
-  <script src="{!! asset('js/jquery.steps.min.js') !!}"></script>
-  <script src="{!! asset('js/jquery.validate.min.js') !!}"></script>
-  
-</head>
-<body>
-<div class="container mt-3">
-  <form id="example-form" action="#">
-    <div>
-      <h3>General</h3>
-      <section>
-        <div class="form-group">
-          <div class="col-xs-6">
-              <label for="name">Name</label>
-              <input type="text" class="form-control required" name="name" id="name" placeholder="first name" title="enter your name.">
-          </div>
-        </div>
-        <div class="form-group">
-            
-            <div class="col-xs-6">
-                <label for="email">Email</label>
-                <input type="email" class="form-control required email" name="email" id="email" placeholder="you@email.com">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-6">
-                <label for="password">Password</label>
-                <input type="password" class="form-control required" name="password" id="password" placeholder="password" title="enter your password.">
-            </div>
-        </div>
-      </section>
-      <h3>Company Profile</h3>
-      <section>
-        <div class="form-group">
-          <div class="col-xs-6">
-            <label for="contact_number">Phone number</label>
-              <input type="text" class="form-control required number" name="contact_number" id="contact_number" placeholder="phone number....." title="enter your phone number">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-xs-6">
-            <label for="city">City</label>
-              <input type="text" class="form-control required" name="city" id="city" placeholder="city.." title="enter your city.">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-xs-6">
-            <label for="state">State</label>
-              <input type="text" class="form-control required" name="state" id="state" placeholder="state..." title="enter your state.">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-xs-6">
-            <label for="country">Country</label>
-              <input type="text" class="form-control required" name="country" id="country" placeholder="Country...." title="enter your country.">
-          </div>
-        </div>
-        <button type="button" class="btn btn-lg btn-success" id="branch">Create Branch Here</button>
-        <button type="button" class="btn btn-lg btn-success" id="level">Create Authorization Level</button>
-        <button type="button" class="btn btn-lg btn-success" id="employee">Create Employee</button><br><br>
-        <button type="button" class="btn btn-lg btn-success show_branch">View Branch Here</button>
-        <button type="button" class="btn btn-lg btn-success show_level">View Authorization Level</button>
-        <button type="button" class="btn btn-lg btn-success show_employee">View Employee</button>
-      </section>
-      <h3>Device</h3>
-      <section>
-          <ul>
-              <li>Foo</li>
-              <li>Bar</li>
-              <li>Foobar</li>
-          </ul>
-      </section>
-      <h3>Payment</h3>
-      <section>
-          <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
-      </section>
-    </div>
-  </form>
+<div style="width:95%;height:600px;border:2px dotted gray;margin:20px;">
+<canvas id="canvas3"></canvas>
 </div>
-  <div class="modal fade branch" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Create Branch</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              x
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="branch_name">Name</label>
-                <input type="text" class="form-control required" id="branch_name" aria-describedby="emailHelp" placeholder="Enter branch name..." name="branch_name">
-                <span id="error_branch_name" class="error"></span>
-              </div>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="branch_manager">Branch manager</label>
-                </div>
-                <select class="custom-select" id="branch_manager">
-                </select>
-              </div>
-              <span id="error_branch_manager" class="error"></span>
-              <div class="form-group">
-                <label for="branch_email">Email</label>
-                <input type="email" class="form-control required" id="branch_email" aria-describedby="emailHelp" placeholder="Enter branch email..." name="branch_email">
-                <span class="error error_branch_email"></span>
-              </div>
-              <div class="form-group">
-                <label for="branch_password">password</label>
-                <input type="password" class="form-control required" id="branch_password" aria-describedby="emailHelp" placeholder="Enter branch password..." name="branch_password">
-                <span id="error_branch_password" class="error"></span>
-              </div>
-              <div class="form-group">
-                <label for="branch_location">Location</label>
-                <input type="text" class="form-control required" id="branch_location" aria-describedby="emailHelp" placeholder="Enter branch location..." name="branch_location">
-                <span id="error_branch_location" class="error"></span>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary branch_submit">Save</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade level" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Create Authorization Level</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="authorization_level">Name</label>
-                <input type="text" class="form-control" id="authorization_level" aria-describedby="emailHelp" placeholder="Enter Authorization Level..." name="authorization_level">
-                <span id="error_level_name" class="error"></span>
-              </div>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="level_person">Authorized person</label>
-                </div>
-                <select class="custom-select" id="level_person">
-                </select>
-              </div>
-              <span id="error_level_person" class="error"></span>
-              <div class="form-group">
-                <label for="level_email">Email</label>
-                <input type="email" class="form-control required" id="level_email" aria-describedby="emailHelp" placeholder="Enter email..." name="level_email">
-                <span class="error error_level_email"></span>
-              </div>
-              <div class="form-group">
-                <label for="level_password">password</label>
-                <input type="password" class="form-control required" id="level_password" aria-describedby="emailHelp" placeholder="Enter password..." name="level_password">
-                <span id="error_level_password" class="error"></span>
-              </div>
-              <div class="form-group">
-                <label for="level_number">Contact number</label>
-                <input type="text" class="form-control required number" id="level_number" aria-describedby="emailHelp" placeholder="Enter contact number..." name="level_number">
-                <span id="error_level_number" class="error"></span>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary authorization_submit">Save</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade employee" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Create Employee</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="employee_name">Name</label>
-                <input type="text" class="form-control" id="employee_name" aria-describedby="emailHelp" placeholder="Enter employee name..." name="employee_name">
-                <span id="error_employee_name" class="error"></span>
-              </div>
-              <div class="form-group">
-                <label for="employee_email">Email</label>
-                <input type="email" class="form-control employee_email" id="employee_email" aria-describedby="emailHelp" placeholder="Enter employee email..." name="employee_email">
-                <span class="error_employee_email error"></span>
-              </div>
-              <div class="form-group">
-                <label for="employee_password">Password</label>
-                <input type="password" class="form-control" id="employee_password" aria-describedby="emailHelp" placeholder="Enter employee password..." name="employee_password">
-                <span id="error_employee_password" class="error"></span>
-              </div>
-              <div class="form-group">
-                <label for="employee_contact_number">Contact Number</label>
-                <input type="text" class="form-control number" id="employee_contact_number" aria-describedby="emailHelp" placeholder="Enter contact number..." name="employee_contact_number">
-                <span id="error_employee_number" class="error"></span>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary employee_submit">Save</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="show_branch" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">View Branch</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Email</th>
-                  <th scope="col" style="width: 243px">Manager</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody id="branch_data">
-              </tbody>
-            </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="show_level" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">View Authorization level</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th scope="col">name</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Person</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody id="level_data">
-              </tbody>
-            </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="show_employee" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">View Employee</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Contact number</th>
-                  <th scope="col">Action</th>                  
-                </tr>
-              </thead>
-              <tbody id="employee_data">
-              </tbody>
-            </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
-  <script type="text/javascript" src="{!! asset('js/storage.js') !!}"></script>
-</body>
-</html>
+<input type="file" id="file-picker" style="display:none;">
+<button class="btn btn-primary pull-right" style="margin-right:60px;" id="save"><i class="mdi mdi-content-save mdi-24px"></i>Save</button>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="{!! asset('/js/jquery-drawr-combined.js') !!}"></script>
+<script type="text/javascript" src="{!! asset('/js/jquery-drawr-combined-min.js') !!}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+// $("#canvas").drawr({ "enable_tranparency" : true, "canvas_width" : 800, "canvas_height" : 800 });
+// $("#canvas").drawr("start");
+$("#canvas3").drawr({
+"enable_tranparency" : false
+});
+
+//Enable drawing mode, show controls
+$("#canvas3").drawr("start");
+
+//add custom save button.
+var buttoncollection = $("#canvas3").drawr("button", {
+"icon":"mdi mdi-folder-open mdi-24px"
+}).on("touchstart mousedown",function(){
+$("#file-picker").click();
+});
+var buttoncollection = $("#canvas3").drawr("button", {
+"icon":"mdi mdi-content-save mdi-24px"
+}).on("touchstart mousedown",function(){
+
+var imagedata = $("#canvas3").drawr("export","image/jpeg");
+
+var file = imagedata;
+
+$.ajax({
+url: '/admin/my-jobs/download-sketchpad/',
+type: 'POST',
+data: { file : file, "_token": "{{ csrf_token() }}",prev_url:""},
+success: function(data){
+console.log(data);
+// $('#download-link').attr('href',data);
+// document.getElementById('download-link').click();
+// $('#uploadedModal').modal('hide');
+document.location.href=data;
+},
+error: function(response){
+alert('Please try after some time');
+}
+});
+// var element = document.createElement('a');
+// element.setAttribute('href', imagedata);
+// element.setAttribute('download', "test.jpg");
+// element.style.display = 'none';
+// document.body.appendChild(element);
+// element.click();
+// document.body.removeChild(element);
+});
+$("#file-picker")[0].onchange = function(){
+var file = $("#file-picker")[0].files[0];
+if (!file.type.startsWith('image/')){ return }
+var reader = new FileReader();
+reader.onload = function(e) { 
+$("#canvas3").drawr("load",e.target.result);
+};
+reader.readAsDataURL(file);
+};
+
+$(document).on('click','#save',function(e){
+var imagedata = $("#canvas3").drawr("export","image/jpeg");
+
+var file = imagedata;
+
+$.ajax({
+url: '/admin/my-jobs/download-sketchpad/',
+type: 'POST',
+data: { file : file, "_token": "{{ csrf_token() }}",prev_url:""},
+success: function(data){
+console.log(data);
+// $('#download-link').attr('href',data);
+// document.getElementById('download-link').click();
+// $('#uploadedModal').modal('hide');
+document.location.href=data;
+},
+error: function(response){
+alert('Please try after some time');
+}
+});
+})
+});
+</script>
