@@ -65,7 +65,7 @@ class HomeController extends Controller
 
     public function writeJson(Request $request)
     {
-        $myFile = "theme.json";
+        $myFile = "/resources/views/theme.json";
         $arr_data = array();
         $formdata = array(
                   'firstName'=> $request->fname,
@@ -77,7 +77,7 @@ class HomeController extends Controller
                // $arr_data = json_decode($jsondata, true);
                array_push($arr_data,$formdata);
                $arr_data = json_encode($arr_data, JSON_PRETTY_PRINT);
-               if(File::put(base_path()."/".$myFile, $arr_data)) {
+               if(File::put(base_path($myFile), $arr_data)) {
                     echo 'Data successfully saved';
                 }
                else {
