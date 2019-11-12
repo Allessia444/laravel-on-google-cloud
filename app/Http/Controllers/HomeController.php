@@ -77,7 +77,7 @@ class HomeController extends Controller
                $arr_data = json_decode($jsondata, true);
                array_push($arr_data,$formdata);
                $jsondata = json_encode($arr_data, JSON_PRETTY_PRINT);
-               if(File::put($myFile, $jsondata)) {
+               if(File::put(base_path()."/".$myFile, $jsondata)) {
                     echo 'Data successfully saved';
                 }
                else {
