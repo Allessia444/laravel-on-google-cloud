@@ -30,7 +30,6 @@
 						<br><br>
 						<input type="submit" id="submit" value="Submit">
 					</form>
-                    You are logged in!
                 </div>
             </div>
         </div>
