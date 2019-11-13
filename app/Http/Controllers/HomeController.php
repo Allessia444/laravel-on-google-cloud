@@ -34,6 +34,31 @@ class HomeController extends Controller
 
     public function getSketch()
     {
+        connectify('success', 'Connection Found', 'Successfully created');
+        drakify('error'); // for error alert 
+        connectify('error', 'Connection Found', 'Successfully created');
+        drakify('success','successfully created'); // for success alert 
+        // smilify('success', 'You are successfully reconnected');
+        notify()->success('successfully created');
+        notify()->error('Invalid data');
+        notify()->warning('Data warning');
+        notify()->info('Welcome');
+
+        $basic  = new \Nexmo\Client\Credentials\Basic('b557a9cc', 'tfWWztkU6Nn8GgYM');
+        $client = new \Nexmo\Client($basic);
+
+        $message = $client->message()->send([
+            'to' => '919924546005',
+            'from' => 'Laravel',
+            'text' => 'Hello from Laravel'
+        ]);
+
+
+        // $message = $client->message()->send([
+        //     'to' => '919924546005',
+        //     'from' => 'Laravel',
+        //     'text' => 'Hello from Laravel'
+        // ]);
         return view('sketch');
     }
 

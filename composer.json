@@ -9,10 +9,13 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "42coders/document-templates": "^1.0",
         "cviebrock/eloquent-sluggable": "^6.0",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "mckenziearts/laravel-notify": "^1.0",
+        "nexmo/client": "^2.0"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
